@@ -1,0 +1,188 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+    135deg,
+    #ffd6e7,
+    #d7eeff
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-family:'Poppins', sans-serif;
+
+    cursor:pointer;
+}
+
+#scene{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+.lyric{
+    font-family:'Caveat', cursive;
+    font-size:4rem;
+    color:#2d3550;
+    text-align:center;
+    max-width:900px;
+    padding:40px;
+
+    transition:
+    transform .8s ease,
+    opacity .8s ease;
+
+    animation:float 4s infinite ease-in-out;
+}
+
+.hint{
+    position:absolute;
+    bottom:30px;
+    right:30px;
+
+    color:#2d3550;
+    opacity:.6;
+
+    font-size:.9rem;
+}
+
+#background-blobs{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+}
+
+.pink{
+    width:400px;
+    height:400px;
+    background:#ffb6d9;
+
+    left:-100px;
+    top:100px;
+
+    animation:drift1 12s infinite alternate ease-in-out;
+}
+
+.blue{
+    width:500px;
+    height:500px;
+    background:#b7e4ff;
+
+    right:-100px;
+    bottom:0;
+
+    animation:drift2 10s infinite alternate ease-in-out;
+}
+
+.spark{
+    color:#ffcb6b;
+    text-shadow:
+    0 0 10px #fff4a0,
+    0 0 30px #fff4a0;
+}
+
+.glow{
+    color:#ff7eb3;
+
+    text-shadow:
+    0 0 10px #ff9ec7,
+    0 0 30px #ff9ec7;
+}
+
+.big{
+    font-size:6rem;
+}
+
+.shake{
+    animation:shake .4s;
+}
+
+.melt{
+    animation:melt 2s infinite ease-in-out;
+}
+
+.spin{
+    animation:spin 4s linear infinite;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+@keyframes drift1{
+    from{
+        transform:translateX(-50px);
+    }
+    to{
+        transform:translateX(50px);
+    }
+}
+
+@keyframes drift2{
+    from{
+        transform:translateY(-50px);
+    }
+    to{
+        transform:translateY(50px);
+    }
+}
+
+@keyframes shake{
+    25%{
+        transform:translateX(-10px);
+    }
+
+    50%{
+        transform:translateX(10px);
+    }
+
+    75%{
+        transform:translateX(-10px);
+    }
+}
+
+@keyframes melt{
+    50%{
+        transform:
+        translateY(25px)
+        scaleY(1.2);
+    }
+}
+
+@keyframes spin{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
