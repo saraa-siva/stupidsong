@@ -14,105 +14,82 @@ body{
     height:100vh;
     overflow:hidden;
 
-    background:linear-gradient(
-        135deg,
-        #ffe5f1 0%,
-        #e8f6ff 100%
-    );
-
-    position:relative;
-    cursor:pointer;
-}
-
-/* scrapbook paper texture */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-
-    background-image:
-        radial-gradient(
-            rgba(255,255,255,.7) 1px,
-            transparent 1px
+    background:
+        linear-gradient(
+            180deg,
+            #ffd9ea 0%,
+            #ffdfe8 20%,
+            #ffecc9 45%,
+            #d9ecff 75%,
+            #cfe4ff 100%
         );
 
-    background-size:18px 18px;
-
-    opacity:.35;
-    pointer-events:none;
+    position:relative;
 }
 
-/* dreamy blobs */
+/* SUN */
 
-#background-blobs{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-    z-index:-2;
-}
-
-.blob{
+.sun{
     position:absolute;
-    border-radius:50%;
-    filter:blur(80px);
-}
 
-.pink{
     width:500px;
     height:500px;
-    background:#ffb8d8;
 
-    top:-100px;
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff6b0,
+            #ffdba5
+        );
+
+    filter:blur(40px);
+
+    top:-120px;
+    right:-120px;
+
+    opacity:.7;
+}
+
+/* CLOUDS */
+
+.cloud{
+    position:absolute;
+
+    background:white;
+
+    border-radius:100px;
+
+    opacity:.45;
+
+    filter:blur(10px);
+}
+
+.cloud1{
+    width:250px;
+    height:90px;
+
+    top:15%;
     left:-100px;
 
-    animation:driftPink 12s ease-in-out infinite alternate;
+    animation:drift 25s linear infinite;
 }
 
-.blue{
-    width:600px;
-    height:600px;
-    background:#bfe6ff;
+.cloud2{
+    width:180px;
+    height:70px;
 
-    bottom:-150px;
-    right:-100px;
+    top:55%;
+    left:-150px;
 
-    animation:driftBlue 15s ease-in-out infinite alternate;
+    animation:drift 40s linear infinite;
 }
 
-/* doodles */
-
-.doodle{
-    position:absolute;
-    pointer-events:none;
-    z-index:1;
-    opacity:.85;
-}
-
-.star{
-    top:8%;
-    left:15%;
-    font-size:3rem;
-    animation:float 5s ease-in-out infinite;
-}
-
-.bow{
-    top:18%;
-    right:12%;
-    font-size:3rem;
-    animation:float 6s ease-in-out infinite;
-}
-
-.heart{
-    bottom:15%;
-    left:10%;
-    font-size:3rem;
-    animation:float 4s ease-in-out infinite;
-}
-
-/* lyric */
+/* LYRIC */
 
 .lyric{
+
     position:absolute;
 
     left:50%;
@@ -120,199 +97,202 @@ body::before{
 
     transform:translate(-50%,-50%);
 
-    font-family:"JustLikeHeaven";
-    font-size:5rem;
-
-    color:#32425b;
+    width:min(1100px,90vw);
 
     text-align:center;
 
-    width:min(900px,90vw);
+    font-family:"JustLikeHeaven";
 
-    transition:
-        opacity .5s ease,
-        transform .5s ease;
+    color:#314364;
+
+    font-size:7rem;
+
+    line-height:1.05;
 
     z-index:10;
-}
 
-/* sticker card */
-
-.sticker{
-    background:white;
-
-    padding:35px 50px;
-
-    border-radius:30px;
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.08);
-
-    border:4px solid white;
-}
-
-/* transitions */
-
-.pop-in{
-    animation:popIn .65s ease;
-}
-
-.spark{
-    color:#ffc95f;
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
 
     text-shadow:
-        0 0 15px #fff0a5,
-        0 0 35px #fff0a5;
+        0 4px 20px rgba(255,255,255,.7);
 }
 
-.glow{
-    color:#ff7eb0;
+/* STARS */
 
-    text-shadow:
-        0 0 15px #ffb4d2,
-        0 0 35px #ffb4d2;
+.star{
+    position:absolute;
+    color:white;
+
+    animation:twinkle 3s infinite;
 }
 
-.big{
-    font-size:6.5rem;
+.star1{
+    top:12%;
+    left:20%;
+    font-size:2rem;
 }
 
-.melt{
-    animation:melt 2s ease-in-out infinite;
+.star2{
+    top:25%;
+    right:20%;
+    font-size:1.8rem;
 }
 
-.shake{
-    animation:shake .4s;
+.star3{
+    bottom:20%;
+    left:15%;
+    font-size:2.5rem;
 }
 
-.spin{
-    animation:spin 4s linear infinite;
+/* CATS */
+
+.cat{
+    position:absolute;
+
+    font-size:4rem;
+
+    opacity:.7;
+
+    animation:float 6s ease-in-out infinite;
+}
+
+.cat1{
+    bottom:8%;
+    right:12%;
+}
+
+.cat2{
+    top:18%;
+    left:8%;
+}
+
+/* BALLERINAS */
+
+.ballerina{
+    position:absolute;
+
+    font-size:3rem;
+
+    opacity:.6;
+
+    animation:float 5s ease-in-out infinite;
+}
+
+.ballerina1{
+    top:20%;
+    right:12%;
+}
+
+.ballerina2{
+    bottom:18%;
+    left:18%;
 }
 
 .hint{
     position:absolute;
-    bottom:25px;
-    right:25px;
+
+    bottom:30px;
+    right:30px;
+
+    color:#5f6d8d;
 
     font-family:sans-serif;
-    font-size:.9rem;
-
-    color:#5d6b82;
-    opacity:.7;
 }
 
-/* animations */
+/* EFFECT CLASSES */
 
-@keyframes popIn{
+.spark{
+    color:#ffbf3f;
+
+    text-shadow:
+        0 0 25px #fff3a6,
+        0 0 60px #fff3a6;
+}
+
+.glow{
+    color:#ff76ab;
+
+    text-shadow:
+        0 0 20px #ffbfd6,
+        0 0 50px #ffbfd6;
+}
+
+.big{
+    font-size:9rem;
+}
+
+.brake{
+    color:#ff6286;
+    letter-spacing:10px;
+}
+
+.insane{
+    animation:heartbeat .7s infinite;
+}
+
+/* ANIMATIONS */
+
+.pop{
+    animation:pop .55s ease;
+}
+
+@keyframes pop{
 
     0%{
         opacity:0;
         transform:
-            translate(-50%,-50%)
-            scale(.2)
-            rotate(-15deg);
+        translate(-50%,-50%)
+        scale(.4)
+        rotate(-8deg);
     }
 
-    75%{
+    70%{
         transform:
-            translate(-50%,-50%)
-            scale(1.1)
-            rotate(3deg);
+        translate(-50%,-50%)
+        scale(1.15)
+        rotate(2deg);
     }
 
     100%{
         transform:
-            translate(-50%,-50%)
-            scale(1)
-            rotate(0deg);
+        translate(-50%,-50%)
+        scale(1);
+        rotate(0deg);
+    }
+}
+
+@keyframes heartbeat{
+
+    50%{
+        transform:
+        translate(-50%,-50%)
+        scale(1.15);
+    }
+}
+
+@keyframes drift{
+
+    from{
+        transform:translateX(-200px);
     }
 
+    to{
+        transform:translateX(calc(100vw + 200px));
+    }
 }
 
 @keyframes float{
 
-    0%{
-        transform:translateY(0px);
-    }
-
     50%{
         transform:translateY(-15px);
     }
-
-    100%{
-        transform:translateY(0px);
-    }
-
 }
 
-@keyframes driftPink{
-
-    from{
-        transform:translate(-50px,-20px);
-    }
-
-    to{
-        transform:translate(50px,20px);
-    }
-
-}
-
-@keyframes driftBlue{
-
-    from{
-        transform:translate(50px,-50px);
-    }
-
-    to{
-        transform:translate(-50px,50px);
-    }
-
-}
-
-@keyframes shake{
-
-    25%{
-        transform:
-            translate(-50%,-50%)
-            translateX(-10px);
-    }
+@keyframes twinkle{
 
     50%{
-        transform:
-            translate(-50%,-50%)
-            translateX(10px);
+        opacity:.3;
     }
-
-    75%{
-        transform:
-            translate(-50%,-50%)
-            translateX(-10px);
-    }
-
-}
-
-@keyframes melt{
-
-    50%{
-        transform:
-            translate(-50%,-40%)
-            scaleY(1.15);
-    }
-
-}
-
-@keyframes spin{
-
-    from{
-        transform:
-            translate(-50%,-50%)
-            rotate(0deg);
-    }
-
-    to{
-        transform:
-            translate(-50%,-50%)
-            rotate(360deg);
-    }
-
 }
