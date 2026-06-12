@@ -281,19 +281,18 @@ function nextScene(){
    SPACEBAR
 ======================= */
 
-document.addEventListener(
-    "keydown",
-    (e)=>{
+function advanceLyric() {
+    nextScene();
+}
 
-        if(
-            e.code === "Space"
-        ){
-
-            e.preventDefault();
-
-            nextScene();
-
-        }
-
+document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+        e.preventDefault();
+        advanceLyric();
     }
+});
+
+document.addEventListener("pointerdown", () => {
+    advanceLyric();
+});
 );
