@@ -9,290 +9,454 @@
     box-sizing:border-box;
 }
 
+html,
 body{
-    width:100vw;
-    height:100vh;
+    width:100%;
+    height:100%;
     overflow:hidden;
+}
+
+/* =======================
+   SKY
+======================= */
+
+body{
+
+    --top:#f8d6ba;
+    --mid:#efb18f;
+    --bottom:#8fb0c7;
 
     background:
         linear-gradient(
             180deg,
-            #ffd9ea 0%,
-            #ffdfe8 20%,
-            #ffecc9 45%,
-            #d9ecff 75%,
-            #cfe4ff 100%
+            var(--top) 0%,
+            var(--mid) 45%,
+            var(--bottom) 100%
         );
+
+    transition:
+        background 1.5s ease;
 
     position:relative;
 }
 
-/* SUN */
+/* =======================
+   SUN
+======================= */
 
 .sun{
+
     position:absolute;
 
-    width:500px;
-    height:500px;
+    width:550px;
+    height:550px;
 
     border-radius:50%;
+
+    top:-180px;
+    right:-120px;
 
     background:
         radial-gradient(
             circle,
-            #fff6b0,
-            #ffdba5
+            #fff6b3,
+            #ffd89d
         );
 
-    filter:blur(40px);
+    filter:blur(50px);
 
-    top:-120px;
-    right:-120px;
+    opacity:.75;
 
-    opacity:.7;
+    transition:
+        background 1.5s ease,
+        transform 1.5s ease;
 }
 
-/* CLOUDS */
+/* =======================
+   FILM GRAIN
+======================= */
 
-.cloud{
-    position:absolute;
+.film-grain{
 
-    background:white;
+    position:fixed;
+    inset:0;
 
-    border-radius:100px;
+    opacity:.08;
 
-    opacity:.45;
+    pointer-events:none;
 
-    filter:blur(10px);
+    background-image:
+        radial-gradient(
+            rgba(255,255,255,.7) 1px,
+            transparent 1px
+        );
+
+    background-size:4px 4px;
+
+    animation:grainMove 8s linear infinite;
 }
 
-.cloud1{
-    width:250px;
-    height:90px;
+/* =======================
+   HAZE
+======================= */
 
-    top:15%;
-    left:-100px;
-
-    animation:drift 25s linear infinite;
-}
-
-.cloud2{
-    width:180px;
-    height:70px;
-
-    top:55%;
-    left:-150px;
-
-    animation:drift 40s linear infinite;
-}
-
-/* LYRIC */
-
-.lyric{
+.haze{
 
     position:absolute;
 
-    left:50%;
-    top:50%;
+    border-radius:50%;
 
-    transform:translate(-50%,-50%);
+    filter:blur(120px);
 
-    width:min(1100px,90vw);
+    pointer-events:none;
+}
+
+.haze-1{
+
+    width:700px;
+    height:700px;
+
+    background:#ffd4b8;
+
+    left:-200px;
+    bottom:-250px;
+
+    opacity:.25;
+
+    animation:drift1 18s ease-in-out infinite;
+}
+
+.haze-2{
+
+    width:600px;
+    height:600px;
+
+    background:#f5c4d8;
+
+    right:-150px;
+    top:20%;
+
+    opacity:.2;
+
+    animation:drift2 22s ease-in-out infinite;
+}
+
+/* =======================
+   STAGE
+======================= */
+
+#stage{
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+}
+
+/* =======================
+   LYRIC
+======================= */
+
+#lyric{
+
+    width:min(1200px,90vw);
 
     text-align:center;
 
     font-family:"JustLikeHeaven";
 
-    color:#314364;
-
-    font-size:7rem;
+    font-size:clamp(4rem,9vw,9rem);
 
     line-height:1.05;
+
+    color:#2f425d;
+
+    text-shadow:
+        0 5px 25px rgba(255,255,255,.5);
 
     z-index:10;
 
     transition:
-        opacity .35s ease,
-        transform .35s ease;
+        opacity .4s ease,
+        transform .4s ease;
+}
+
+.intro{
+
+    opacity:.8;
+}
+
+/* =======================
+   SPECIAL WORD EFFECTS
+======================= */
+
+.spark-word{
+
+    color:#ffd45f;
 
     text-shadow:
-        0 4px 20px rgba(255,255,255,.7);
+        0 0 10px #fff4a7,
+        0 0 25px #fff4a7,
+        0 0 40px #fff4a7;
+
+    animation:
+        sparkFlicker 2s infinite;
 }
 
-/* STARS */
+.aflame-word{
 
-.star{
+    background:
+        linear-gradient(
+            180deg,
+            #fff7a8,
+            #ffba63,
+            #ff6f5e
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    animation:
+        fireDance .8s infinite alternate;
+}
+
+.your-name{
+
+    display:inline-block;
+
+    color:#ff88a9;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    border-right:3px solid #ff88a9;
+
+    animation:
+        handwriting 1.5s steps(20,end) forwards,
+        cursorBlink .7s infinite;
+}
+
+.melt-word{
+
+    display:inline-block;
+
+    color:#ffb4a7;
+
+    animation:
+        melt 2s ease-in-out infinite;
+}
+
+.thread-word{
+
+    display:inline-block;
+
+    color:#c73c4c;
+
+    position:relative;
+
+    animation:
+        unravel 2s ease-in-out infinite;
+}
+
+.thread-word::after{
+
+    content:"";
+
     position:absolute;
-    color:white;
 
-    animation:twinkle 3s infinite;
+    height:2px;
+    width:60px;
+
+    background:#c73c4c;
+
+    top:50%;
+    left:100%;
+
+    margin-left:8px;
 }
 
-.star1{
-    top:12%;
-    left:20%;
-    font-size:2rem;
+.brake-word{
+
+    display:inline-block;
+
+    color:#ff5e7a;
+
+    letter-spacing:8px;
+
+    animation:
+        brakeShake .12s infinite;
 }
 
-.star2{
-    top:25%;
-    right:20%;
-    font-size:1.8rem;
+.insane-word{
+
+    display:inline-block;
+
+    color:#ff7199;
+
+    animation:
+        heartbeat .65s infinite;
 }
 
-.star3{
-    bottom:20%;
-    left:15%;
-    font-size:2.5rem;
-}
-
-/* CATS */
-
-.cat{
-    position:absolute;
-
-    font-size:4rem;
-
-    opacity:.7;
-
-    animation:float 6s ease-in-out infinite;
-}
-
-.cat1{
-    bottom:8%;
-    right:12%;
-}
-
-.cat2{
-    top:18%;
-    left:8%;
-}
-
-/* BALLERINAS */
-
-.ballerina{
-    position:absolute;
-
-    font-size:3rem;
-
-    opacity:.6;
-
-    animation:float 5s ease-in-out infinite;
-}
-
-.ballerina1{
-    top:20%;
-    right:12%;
-}
-
-.ballerina2{
-    bottom:18%;
-    left:18%;
-}
+/* =======================
+   HINT
+======================= */
 
 .hint{
+
     position:absolute;
 
     bottom:30px;
     right:30px;
 
-    color:#5f6d8d;
-
     font-family:sans-serif;
+
+    color:rgba(47,66,93,.6);
+
+    font-size:.95rem;
 }
 
-/* EFFECT CLASSES */
+/* =======================
+   TRANSITIONS
+======================= */
 
-.spark{
-    color:#ffbf3f;
+.fade-in{
 
-    text-shadow:
-        0 0 25px #fff3a6,
-        0 0 60px #fff3a6;
+    animation:
+        fadeIn .45s ease;
 }
 
-.glow{
-    color:#ff76ab;
+@keyframes fadeIn{
 
-    text-shadow:
-        0 0 20px #ffbfd6,
-        0 0 50px #ffbfd6;
-}
-
-.big{
-    font-size:9rem;
-}
-
-.brake{
-    color:#ff6286;
-    letter-spacing:10px;
-}
-
-.insane{
-    animation:heartbeat .7s infinite;
-}
-
-/* ANIMATIONS */
-
-.pop{
-    animation:pop .55s ease;
-}
-
-@keyframes pop{
-
-    0%{
+    from{
         opacity:0;
-        transform:
-        translate(-50%,-50%)
-        scale(.4)
-        rotate(-8deg);
+        transform:translateY(20px);
     }
 
-    70%{
-        transform:
-        translate(-50%,-50%)
-        scale(1.15)
-        rotate(2deg);
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =======================
+   WORD ANIMATIONS
+======================= */
+
+@keyframes sparkFlicker{
+
+    50%{
+        opacity:.8;
+    }
+}
+
+@keyframes fireDance{
+
+    from{
+        transform:translateY(0);
     }
 
-    100%{
+    to{
+        transform:translateY(-3px);
+    }
+}
+
+@keyframes handwriting{
+
+    from{
+        width:0;
+    }
+
+    to{
+        width:100%;
+    }
+}
+
+@keyframes cursorBlink{
+
+    50%{
+        border-color:transparent;
+    }
+}
+
+@keyframes melt{
+
+    50%{
+
         transform:
-        translate(-50%,-50%)
-        scale(1);
-        rotate(0deg);
+            translateY(12px)
+            scaleY(1.15);
+
+    }
+}
+
+@keyframes unravel{
+
+    50%{
+
+        letter-spacing:12px;
+
+    }
+}
+
+@keyframes brakeShake{
+
+    25%{
+        transform:translateX(-3px);
+    }
+
+    50%{
+        transform:translateX(3px);
+    }
+
+    75%{
+        transform:translateX(-3px);
     }
 }
 
 @keyframes heartbeat{
 
     50%{
+
         transform:
-        translate(-50%,-50%)
-        scale(1.15);
+            scale(1.18);
+
     }
 }
 
-@keyframes drift{
+/* =======================
+   ATMOSPHERE
+======================= */
+
+@keyframes drift1{
+
+    50%{
+        transform:
+            translate(80px,-30px);
+    }
+}
+
+@keyframes drift2{
+
+    50%{
+        transform:
+            translate(-60px,50px);
+    }
+}
+
+@keyframes grainMove{
 
     from{
-        transform:translateX(-200px);
+        transform:translate(0,0);
     }
 
     to{
-        transform:translateX(calc(100vw + 200px));
-    }
-}
-
-@keyframes float{
-
-    50%{
-        transform:translateY(-15px);
-    }
-}
-
-@keyframes twinkle{
-
-    50%{
-        opacity:.3;
+        transform:translate(20px,20px);
     }
 }
