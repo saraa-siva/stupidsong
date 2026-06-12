@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "JustLikeHeaven";
+    src: url("JustLikeHeavenRegular.otf") format("opentype");
+}
+
 *{
     margin:0;
     padding:0;
@@ -9,180 +14,305 @@ body{
     height:100vh;
     overflow:hidden;
 
-    background:
-    linear-gradient(
-    135deg,
-    #ffd6e7,
-    #d7eeff
+    background:linear-gradient(
+        135deg,
+        #ffe5f1 0%,
+        #e8f6ff 100%
     );
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-family:'Poppins', sans-serif;
-
+    position:relative;
     cursor:pointer;
 }
 
-#scene{
-    width:100%;
-    height:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    position:relative;
+/* scrapbook paper texture */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+        radial-gradient(
+            rgba(255,255,255,.7) 1px,
+            transparent 1px
+        );
+
+    background-size:18px 18px;
+
+    opacity:.35;
+    pointer-events:none;
 }
 
-.lyric{
-    font-family:'Caveat', cursive;
-    font-size:4rem;
-    color:#2d3550;
-    text-align:center;
-    max-width:900px;
-    padding:40px;
-
-    transition:
-    transform .8s ease,
-    opacity .8s ease;
-
-    animation:float 4s infinite ease-in-out;
-}
-
-.hint{
-    position:absolute;
-    bottom:30px;
-    right:30px;
-
-    color:#2d3550;
-    opacity:.6;
-
-    font-size:.9rem;
-}
+/* dreamy blobs */
 
 #background-blobs{
     position:fixed;
     inset:0;
     overflow:hidden;
-    z-index:-1;
+    z-index:-2;
 }
 
 .blob{
     position:absolute;
     border-radius:50%;
-    filter:blur(70px);
+    filter:blur(80px);
 }
 
 .pink{
-    width:400px;
-    height:400px;
-    background:#ffb6d9;
+    width:500px;
+    height:500px;
+    background:#ffb8d8;
 
+    top:-100px;
     left:-100px;
-    top:100px;
 
-    animation:drift1 12s infinite alternate ease-in-out;
+    animation:driftPink 12s ease-in-out infinite alternate;
 }
 
 .blue{
-    width:500px;
-    height:500px;
-    background:#b7e4ff;
+    width:600px;
+    height:600px;
+    background:#bfe6ff;
 
+    bottom:-150px;
     right:-100px;
-    bottom:0;
 
-    animation:drift2 10s infinite alternate ease-in-out;
+    animation:driftBlue 15s ease-in-out infinite alternate;
+}
+
+/* doodles */
+
+.doodle{
+    position:absolute;
+    pointer-events:none;
+    z-index:1;
+    opacity:.85;
+}
+
+.star{
+    top:8%;
+    left:15%;
+    font-size:3rem;
+    animation:float 5s ease-in-out infinite;
+}
+
+.bow{
+    top:18%;
+    right:12%;
+    font-size:3rem;
+    animation:float 6s ease-in-out infinite;
+}
+
+.heart{
+    bottom:15%;
+    left:10%;
+    font-size:3rem;
+    animation:float 4s ease-in-out infinite;
+}
+
+/* lyric */
+
+.lyric{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    font-family:"JustLikeHeaven";
+    font-size:5rem;
+
+    color:#32425b;
+
+    text-align:center;
+
+    width:min(900px,90vw);
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+
+    z-index:10;
+}
+
+/* sticker card */
+
+.sticker{
+    background:white;
+
+    padding:35px 50px;
+
+    border-radius:30px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.08);
+
+    border:4px solid white;
+}
+
+/* transitions */
+
+.pop-in{
+    animation:popIn .65s ease;
 }
 
 .spark{
-    color:#ffcb6b;
+    color:#ffc95f;
+
     text-shadow:
-    0 0 10px #fff4a0,
-    0 0 30px #fff4a0;
+        0 0 15px #fff0a5,
+        0 0 35px #fff0a5;
 }
 
 .glow{
-    color:#ff7eb3;
+    color:#ff7eb0;
 
     text-shadow:
-    0 0 10px #ff9ec7,
-    0 0 30px #ff9ec7;
+        0 0 15px #ffb4d2,
+        0 0 35px #ffb4d2;
 }
 
 .big{
-    font-size:6rem;
+    font-size:6.5rem;
+}
+
+.melt{
+    animation:melt 2s ease-in-out infinite;
 }
 
 .shake{
     animation:shake .4s;
 }
 
-.melt{
-    animation:melt 2s infinite ease-in-out;
-}
-
 .spin{
     animation:spin 4s linear infinite;
 }
 
-@keyframes float{
+.hint{
+    position:absolute;
+    bottom:25px;
+    right:25px;
+
+    font-family:sans-serif;
+    font-size:.9rem;
+
+    color:#5d6b82;
+    opacity:.7;
+}
+
+/* animations */
+
+@keyframes popIn{
+
     0%{
-        transform:translateY(0px);
-    }
-    50%{
-        transform:translateY(-15px);
-    }
-    100%{
-        transform:translateY(0px);
-    }
-}
-
-@keyframes drift1{
-    from{
-        transform:translateX(-50px);
-    }
-    to{
-        transform:translateX(50px);
-    }
-}
-
-@keyframes drift2{
-    from{
-        transform:translateY(-50px);
-    }
-    to{
-        transform:translateY(50px);
-    }
-}
-
-@keyframes shake{
-    25%{
-        transform:translateX(-10px);
-    }
-
-    50%{
-        transform:translateX(10px);
+        opacity:0;
+        transform:
+            translate(-50%,-50%)
+            scale(.2)
+            rotate(-15deg);
     }
 
     75%{
-        transform:translateX(-10px);
+        transform:
+            translate(-50%,-50%)
+            scale(1.1)
+            rotate(3deg);
     }
+
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1)
+            rotate(0deg);
+    }
+
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+@keyframes driftPink{
+
+    from{
+        transform:translate(-50px,-20px);
+    }
+
+    to{
+        transform:translate(50px,20px);
+    }
+
+}
+
+@keyframes driftBlue{
+
+    from{
+        transform:translate(50px,-50px);
+    }
+
+    to{
+        transform:translate(-50px,50px);
+    }
+
+}
+
+@keyframes shake{
+
+    25%{
+        transform:
+            translate(-50%,-50%)
+            translateX(-10px);
+    }
+
+    50%{
+        transform:
+            translate(-50%,-50%)
+            translateX(10px);
+    }
+
+    75%{
+        transform:
+            translate(-50%,-50%)
+            translateX(-10px);
+    }
+
 }
 
 @keyframes melt{
+
     50%{
         transform:
-        translateY(25px)
-        scaleY(1.2);
+            translate(-50%,-40%)
+            scaleY(1.15);
     }
+
 }
 
 @keyframes spin{
+
     from{
-        transform:rotate(0deg);
+        transform:
+            translate(-50%,-50%)
+            rotate(0deg);
     }
+
     to{
-        transform:rotate(360deg);
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
     }
+
 }
