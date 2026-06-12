@@ -23,7 +23,16 @@ className:""
 },
 
 {
-text:"when somebody says<br><span style='color:#ff82b3'>your name ♡</span>",
+text:`
+when somebody says
+
+<div style="
+font-size:1.5em;
+color:#ff6ea7;
+">
+your name ♡
+</div>
+`,
 className:"big"
 },
 
@@ -34,7 +43,7 @@ className:""
 
 {
 text:"WITHOUT A BRAKE",
-className:"shake big"
+className:"big brake"
 },
 
 {
@@ -54,7 +63,7 @@ className:""
 
 {
 text:"and i'm melting in the sun ☀",
-className:"melt"
+className:"glow"
 },
 
 {
@@ -79,18 +88,18 @@ className:""
 
 {
 text:"i feel totally insane",
-className:"spin"
+className:"big insane"
 },
 
 {
 text:`
-<div style="line-height:1.3">
+<div style="line-height:1.15">
 and i want you more<br>
 than any stupid song<br>
 could ever say ♡
 </div>
 `,
-className:"big"
+className:"big glow"
 }
 
 ];
@@ -108,9 +117,9 @@ function nextScene(){
 
     lyric.style.opacity = 0;
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
-        lyric.className = "lyric sticker pop-in";
+        lyric.className = "lyric pop";
 
         lyric.innerHTML = scenes[current].text;
 
@@ -124,7 +133,7 @@ function nextScene(){
 
         lyric.style.opacity = 1;
 
-    },250);
+    },200);
 
 }
 
