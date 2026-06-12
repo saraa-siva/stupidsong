@@ -285,14 +285,5 @@ function advanceLyric() {
     nextScene();
 }
 
-document.addEventListener("keydown", (e) => {
-    if (e.code === "Space") {
-        e.preventDefault();
-        advanceLyric();
-    }
-});
-
-document.addEventListener("pointerdown", () => {
-    advanceLyric();
-});
+document.addEventListener( "keydown", (e)=>{ if( e.code === "Space" ){ e.preventDefault(); nextScene(); } }
 );
