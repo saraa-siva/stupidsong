@@ -236,6 +236,8 @@ body{
 
     white-space:nowrap;
 
+    width:0;
+
     border-right:3px solid #ff88a9;
 
     animation:
