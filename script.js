@@ -1,150 +1,299 @@
 const lyric = document.getElementById("lyric");
+const body = document.body;
+const sun = document.querySelector(".sun");
 
-const scenes = [
+/* =======================
+   SUNSET PROGRESSION
+======================= */
+
+const sunsets = [
 
 {
-text:"press space ♡",
-className:""
+top:"#f8d6ba",
+mid:"#efb18f",
+bottom:"#8fb0c7",
+sun:"#ffd89d"
 },
 
 {
-text:"you're a spark in the dark ✦",
-className:"spark"
+top:"#f6caa8",
+mid:"#eaab83",
+bottom:"#84a7c2",
+sun:"#ffc88b"
 },
 
 {
-text:"and my clothes all caught aflame",
-className:"glow"
+top:"#f4bf98",
+mid:"#e39878",
+bottom:"#7d9ebf",
+sun:"#ffb576"
 },
 
 {
-text:"you should feel how i feel",
-className:""
+top:"#efb088",
+mid:"#da866f",
+bottom:"#7594b7",
+sun:"#ff9f68"
 },
 
 {
-text:`
-when somebody says
-
-<div style="
-font-size:1.5em;
-color:#ff6ea7;
-">
-your name ♡
-</div>
-`,
-className:"big"
+top:"#e59f84",
+mid:"#c97773",
+bottom:"#6c89ad",
+sun:"#ff8d72"
 },
 
 {
-text:"i'm a car speeding down<br>the boulevard",
-className:""
+top:"#d58e8e",
+mid:"#b06d80",
+bottom:"#647fa4",
+sun:"#ff7f8c"
 },
 
 {
-text:"WITHOUT A BRAKE",
-className:"big brake"
-},
-
-{
-text:"and i want you more",
-className:"big"
-},
-
-{
-text:"than any stupid song<br>could ever say ♫",
-className:""
-},
-
-{
-text:"i'm a heart made of wax ♡",
-className:""
-},
-
-{
-text:"and i'm melting in the sun ☀",
-className:"glow"
-},
-
-{
-text:"i'm a thread on your shirt",
-className:""
-},
-
-{
-text:"that is coming undone...",
-className:""
-},
-
-{
-text:"i feel right",
-className:""
-},
-
-{
-text:"i feel wrong",
-className:""
-},
-
-{
-text:"i feel totally insane",
-className:"big insane"
-},
-
-{
-text:`
-<div style="line-height:1.15">
-and i want you more<br>
-than any stupid song<br>
-could ever say ♡
-</div>
-`,
-className:"big glow"
+top:"#c6809c",
+mid:"#975e8a",
+bottom:"#5b7398",
+sun:"#ff7ca6"
 }
 
 ];
 
+/* =======================
+   LYRICS
+======================= */
+
+const scenes = [
+
+`
+<div class="intro">
+press space ♡
+</div>
+`,
+
+`
+you're a
+<span class="spark-word">spark</span>
+in the dark
+`,
+
+`
+and my clothes all caught
+<span class="aflame-word">aflame</span>
+`,
+
+`
+you should feel how i feel
+`,
+
+`
+when somebody says
+
+<br><br>
+
+<span class="your-name">
+your name
+</span>
+`,
+
+`
+i'm a car speeding down
+
+<br>
+
+the boulevard
+`,
+
+`
+WITHOUT A
+
+<br>
+
+<span class="brake-word">
+BRAKE
+</span>
+`,
+
+`
+and i want you more
+`,
+
+`
+than any stupid song
+
+<br>
+
+could ever say
+`,
+
+`
+i'm a heart made of wax ♡
+`,
+
+`
+and i'm
+
+<span class="melt-word">
+melting
+</span>
+
+in the sun
+`,
+
+`
+i'm a thread on your shirt
+`,
+
+`
+that is coming
+
+<span class="thread-word">
+undone
+</span>
+`,
+
+`
+i feel right
+`,
+
+`
+i feel wrong
+`,
+
+`
+i feel totally
+
+<span class="insane-word">
+INSANE
+</span>
+`,
+
+`
+and i want you more
+
+<br>
+
+than any stupid song
+
+<br>
+
+could ever say ♡
+`
+
+];
+
 let current = 0;
+
+/* =======================
+   INITIAL STATE
+======================= */
+
+lyric.innerHTML = scenes[0];
+
+/* =======================
+   UPDATE SUNSET
+======================= */
+
+function updateSunset(){
+
+    const stage =
+        Math.min(
+            current,
+            sunsets.length - 1
+        );
+
+    const colors = sunsets[stage];
+
+    body.style.setProperty(
+        "--top",
+        colors.top
+    );
+
+    body.style.setProperty(
+        "--mid",
+        colors.mid
+    );
+
+    body.style.setProperty(
+        "--bottom",
+        colors.bottom
+    );
+
+    sun.style.background = `
+    radial-gradient(
+        circle,
+        #fff6b3,
+        ${colors.sun}
+    )
+    `;
+
+    sun.style.transform =
+        `scale(${1 + stage * 0.02})`;
+}
+
+/* =======================
+   NEXT SCENE
+======================= */
 
 function nextScene(){
 
     current++;
 
     if(current >= scenes.length){
+
         current = scenes.length - 1;
         return;
+
     }
 
     lyric.style.opacity = 0;
 
+    lyric.style.transform =
+        "translateY(15px)";
+
     setTimeout(() => {
 
-        lyric.className = "lyric pop";
+        lyric.innerHTML =
+            scenes[current];
 
-        lyric.innerHTML = scenes[current].text;
+        lyric.classList.remove(
+            "fade-in"
+        );
 
-        if(scenes[current].className){
+        void lyric.offsetWidth;
 
-            lyric.classList.add(
-                ...scenes[current].className.split(" ")
-            );
-
-        }
+        lyric.classList.add(
+            "fade-in"
+        );
 
         lyric.style.opacity = 1;
 
-    },200);
+        lyric.style.transform =
+            "translateY(0px)";
+
+        updateSunset();
+
+    },250);
 
 }
 
-document.addEventListener("keydown",(e)=>{
+/* =======================
+   SPACEBAR
+======================= */
 
-    if(e.code === "Space"){
+document.addEventListener(
+    "keydown",
+    (e)=>{
 
-        e.preventDefault();
+        if(
+            e.code === "Space"
+        ){
 
-        nextScene();
+            e.preventDefault();
+
+            nextScene();
+
+        }
 
     }
-
-});
+);
